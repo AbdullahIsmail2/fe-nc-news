@@ -11,7 +11,7 @@ const Articles = () => {
 				<TopicCard topic="Cooking" />
 				<TopicCard topic="Football" />
 				<TopicCard topic="Coding" />
-				<TopicCard topic="All" />
+				<TopicCard topic="" />
 			</section>
 		</div>
 	);
