@@ -1,5 +1,5 @@
 import React, { useDebugValue, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 
 const Topic = ({ articles }) => {
 	const { topic } = useParams();
@@ -14,19 +14,35 @@ const Topic = ({ articles }) => {
 			console.log(filteredArticles);
 			setCurrentArticles(filteredArticles);
 		} else {
-      setCurrentArticles(articles)
-    }
+			setCurrentArticles(articles);
+		}
 	}, [topic]);
 
 	return (
-		<div>
-			{currentArticles.map(article => (
-          <div>
-            <h1>{article.title}</h1>
-            <p>{article.author}</p>
-          </div>
-      ))}
-		</div>
+		<main className="topic-page-container">
+			{currentArticles.map((article) => {
+				let date = article.created_at;
+				date = date.slice(0, date.indexOf("T"));
+				return (
+					<article
+						key={article.article_id}
+						className="article-preview-container"
+					>
+						<div className="article-preview-img-container">
+							<img src={article.article_img_url} />
+						</div>
+						<div className="article-preview-info-container">
+							<div className="article-preview-author-date-container">
+								<p>{article.author}</p>
+								<p>{date}</p>
+							</div>
+							<h4 className="title">{article.title}</h4>
+							<Link>Read More</Link>
+						</div>
+					</article>
+				);
+			})}
+		</main>
 	);
 };
 
