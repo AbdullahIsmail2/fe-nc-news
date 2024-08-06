@@ -21,8 +21,8 @@ const Topic = ({ articles }) => {
 	return (
 		<main className="topic-page-container">
 			{currentArticles.map((article) => {
-				let date = article.created_at;
-				date = date.slice(0, date.indexOf("T"));
+				const date = article.created_at;
+				const formattedDate = date.slice(0, date.indexOf("T"));
 				return (
 					<article
 						key={article.article_id}
@@ -34,7 +34,7 @@ const Topic = ({ articles }) => {
 						<div className="article-preview-info-container">
 							<div className="article-preview-author-date-container">
 								<p>{article.author}</p>
-								<p>{date}</p>
+								<p>{formattedDate}</p>
 							</div>
 							<h4 className="title">{article.title}</h4>
 							<Link>Read More</Link>
