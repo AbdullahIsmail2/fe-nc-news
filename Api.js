@@ -24,3 +24,11 @@ export const getArticlesById = (id) => {
 	});
 };
 
+export const getCommentsByArticleId = (id) => {
+	return newsApi
+		.get(`/api/articles/${id}/comments`)
+		.then(({ data: { comments } }) => {
+			console.log
+			return comments;
+		});
+};

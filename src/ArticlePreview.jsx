@@ -22,6 +22,7 @@ const ArticlePreview = ({ article, setSingleArticle }) => {
 				<h4 className="title">{article.title}</h4>
 				<p>Read More</p>
 			</div>
+			
 		</Link>
 	);
 };

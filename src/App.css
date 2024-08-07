@@ -143,3 +143,12 @@ h2 {
 	display: flex;
 	justify-content: space-between;
 }
+
+
+.back-button {
+	margin-top: 1rem;
+	margin-left: 2.5rem;
+	border: none;
+	font-size: 1.5rem;
+	text-decoration: underline;
+}
