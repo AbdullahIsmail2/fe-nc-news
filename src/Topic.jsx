@@ -1,9 +1,10 @@
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ArticlePreview from "./ArticlePreview";
 import { getArticlesByTopic } from "../Api";
 import { useSearchParams } from "react-router-dom";
+import BackButton from "./BackButton";
 
-const Topic = ({ articles}) => {
+const Topic = ({ articles }) => {
 	const [currentArticles, setCurrentArticles] = useState([]);
 
 	const [searchParams] = useSearchParams();
@@ -19,16 +20,14 @@ const Topic = ({ articles}) => {
 	}, [topic]);
 
 	return (
-		<main className="topic-page-container">
-			{currentArticles.map((article) => {
-				return (
-					<ArticlePreview
-						article={article}
-						key={article.article_id}
-					/>
-				);
-			})}
-		</main>
+		<>
+			<BackButton />
+			<main className="topic-page-container">
+				{currentArticles.map((article) => {
+					return <ArticlePreview article={article} key={article.article_id} />;
+				})}
+			</main>
+		</>
 	);
 };
 
