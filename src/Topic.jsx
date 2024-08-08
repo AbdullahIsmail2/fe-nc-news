@@ -13,7 +13,6 @@ const Topic = ({ articles }) => {
 	useEffect(() => {
 		if (topic) {
 			getArticlesByTopic(topic).then((articles) => {
-				console.log(articles);
 				setCurrentArticles(articles);
 			});
 		} else setCurrentArticles(articles);
