@@ -1,6 +1,6 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { getArticlesById, getCommentsByArticleId } from "../Api";
+import { getArticlesById, getCommentsByArticleId, voteOnArticle } from "../Api";
 import { useEffect, useState } from "react";
 import BackButton from "./BackButton";
 import CommentCard from "./CommentCard";
@@ -8,6 +8,7 @@ import CommentCard from "./CommentCard";
 const FullArticle = () => {
 	const [singleArticle, setSingleArticle] = useState([]);
 	const [comments, setComments] = useState([]);
+	const [hasVoted, setHasVoted] = useState(false);
 	const [formattedDate, setFormattedDate] = useState("");
 	const { article_id } = useParams();
 
@@ -28,6 +29,23 @@ const FullArticle = () => {
 		}
 	}, [singleArticle]);
 
+	const handleVote = () => {
+		console.log(singleArticle.article_id);
+		if (!hasVoted) {
+			voteOnArticle(singleArticle.article_id, 1).then((article) => {
+				setSingleArticle(article);
+				setHasVoted(true)
+			});
+		} else {
+			voteOnArticle(singleArticle.article_id, -1).then((article) => {
+				setSingleArticle(article);
+				setHasVoted(false)
+			});
+		}
+
+		// }
+	};
+
 	return (
 		<>
 			<BackButton />
@@ -40,8 +58,13 @@ const FullArticle = () => {
 					<h4 className="full-article-title">{singleArticle.title}</h4>
 					<p className="full-article-author">{singleArticle.author}</p>
 					<div>
-						<p>{`Votes : ${singleArticle.votes}`}</p>
 						<p>{formattedDate}</p>
+						<div style={{ display: "flex", gap: "20px" }}>
+							<p>{`Votes : ${singleArticle.votes}`}</p>
+							<button style={{ cursor: "pointer" }} onClick={handleVote}>
+								{!hasVoted ? 'Vote' : 'Unvote'}
+							</button>
+						</div>
 					</div>
 					<p className="full-article-body">{singleArticle.body}</p>
 				</div>
@@ -49,7 +72,7 @@ const FullArticle = () => {
 					className="full-article-comments-container"
 					style={{ width: "85%", margin: "0 auto", marginTop: "2rem" }}
 				>
-					<h4 style={{'marginBottom' : '2rem'}}>Comments</h4>
+					<h4 style={{ marginBottom: "2rem" }}>Comments</h4>
 					{comments.map((comment) => (
 						<CommentCard comment={comment} />
 					))}
