@@ -28,7 +28,13 @@ export const getCommentsByArticleId = (id) => {
 	return newsApi
 		.get(`/api/articles/${id}/comments`)
 		.then(({ data: { comments } }) => {
-			console.log
+			console.log;
 			return comments;
 		});
+};
+
+export const voteOnArticle = (article_id, number) => {
+	return newsApi
+		.patch(`/api/articles/${article_id}`, { inc_votes: number })
+		.then(({ data: { article } }) => article);
 };
