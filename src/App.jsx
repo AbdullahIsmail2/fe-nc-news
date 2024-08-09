@@ -6,6 +6,7 @@ import Topic from "./Topic";
 import { getArticles } from "../Api";
 import ArticlePreview from "./ArticlePreview";
 import FullArticle from "./FullArticle";
+import Login from "./Login";
 
 function App() {
 	const [articles, setArticles] = useState([]);
@@ -16,11 +17,13 @@ function App() {
 		});
 	}, []);
 
+
 	return (
 		<>
 			<Header />
 			<Routes>
 				<Route path="/" element={<Articles />} />
+				<Route path="/login" element={<Login />} />
 				<Route
 					path="/articles"
 					element={

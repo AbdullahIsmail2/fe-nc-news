@@ -144,6 +144,8 @@ const FullArticle = () => {
 					{comments.map((comment) => (
 						<CommentCard
 							comment={comment}
+							comments={comments}
+							setComments={setComments}
 							singleArticle={singleArticle}
 							setSingleArticle={setSingleArticle}
 						/>
